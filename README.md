@@ -94,13 +94,19 @@ Ideal for dimming, heating control, and industrial power modulation applications
 ---
 
 ## 📜 Version History
-| Version | Release Date | Key Improvements                                      |
-|---------|--------------|-------------------------------------------------------|
-| v1.0    | Jan 2025     | Basic TRIAC control                                  |
-| v2.0    | Mar 2025     | Improved ZCD accuracy                                |
-| v2.2    | Apr 2025     | MQTT remote control                                  |
-| v2.3    | May 2025     | TLS encryption                                       |
-| **v3.0**| Jul 2025     | OTA updates • NTP sync • Heap recovery • Safety upgrades |
+| Version  | Release Date  | Key Improvements                                                                 |
+|----------|---------------|----------------------------------------------------------------------------------|
+| v1.0     | Nov 2024      | Basic TRIAC control with AC voltage & current monitoring                       |
+| v2.0     | Apr 2025      | Enhanced zero-cross detection accuracy                                         |
+| v2.1     | Apr 2025      | Optimized phase angle calculation                                              |
+| v2.2     | Apr 2025      | Added MQTT remote control                                                      |
+| v2.3     | May 2025      | Bug fixes and improvements                                                     |
+| v2.4     | May 2025      | Enabled TLS encryption for MQTT                                                |
+| v2.5     | May 2025      | Implemented secure OTA firmware updates                                        |
+| v2.6     | Jun 2025      | Integrated NTP time sync                                                       |
+| v2.7     | Jun 2025      | Launched Android flutter app                                                   |
+| v2.8     | Jul 2025      | Added heap monitoring and Auto-recovery on memory fault                        |
+| **v2.9** | Jul 2025      | Improved AC monitoring measurements                                            |
 
 ---
 
@@ -122,7 +128,7 @@ Ideal for dimming, heating control, and industrial power modulation applications
 
 <div align="center">
 
-### Crafted with ❤️ by [Nariman_Z](https://github.com/Nariman-Z)  
+### Made with ❤️ by [Nariman_Z](https://github.com/Nariman-Z)  
 🌐 [Personal Website](https://nariman-z.pages.io/)
 
 </div>

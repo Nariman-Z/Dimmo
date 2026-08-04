@@ -29,6 +29,6 @@ Welcome to the official documentation hub for the **Dimmo IoT Smart Dimmer Syste
 
 ## 📑 Local PDF & Media Assets
 
-* **Datasheets Directory**: [`docs/pdf/`](pdf/)
+* **Component Datasheets**: [`hardware/datasheets/`](../hardware/datasheets/)
 * **Academic B.Sc. Thesis**: [`docs/pdf/BSc_Thesis_Nariman_Ziaie.pdf`](pdf/BSc_Thesis_Nariman_Ziaie.pdf) (By Nariman Ziaie)
 * **Oscilloscope Images & Waveform Captures**: [`docs/images/`](images/)

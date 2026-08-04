@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DimmoCommandPayload",
+  "description": "Schema for Dimmo IoT Smart Dimmer incoming commands published to devices/{deviceId}/command",
+  "type": "object",
+  "properties": {
+    "brightness": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Dimming level percentage (0% = min/off, 100% = max power)"
+    },
+    "power": {
+      "type": "boolean",
+      "description": "TRIAC main power state (true = enabled/ON, false = disabled/OFF)"
+    }
+  },
+  "anyOf": [
+    { "required": ["brightness"] },
+    { "required": ["power"] }
+  ],
+  "additionalProperties": false
+}

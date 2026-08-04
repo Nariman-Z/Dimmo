@@ -1,0 +1,36 @@
+# Ignore local IDE settings, but keep the shared workspace file
+.vscode/
+firmware/.vscode/
+flutter_app/.vscode/
+
+# Optional: Python virtual environments (if used)
+venv/
+env/
+
+# Build artifacts produced by the toolchain
+*.bin
+*.elf
+*.hex
+*.map
+
+# Object and dependency files
+*.o
+*.a
+*.d
+*.lnk
+
+# Generated files from compilation
+*.cxx
+*.swp
+*.tmp
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary data
+*.log
+
+# Local secret configuration files
+scripts/config.json

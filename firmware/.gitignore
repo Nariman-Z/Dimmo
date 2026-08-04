@@ -1,0 +1,45 @@
+# Polished .gitignore for ESP32 PlatformIO project
+# ---------------------------------------------------
+
+# Exclude PlatformIO build output and caches
+/.pio/
+
+# VS Code workspace settings
+/.vscode/
+
+# Security / Credentials (CRITICAL)
+# Never leak your Wi-Fi credentials or MQTT broker keys!
+lib/Secrets/Secrets.c
+lib/Secrets/Secrets.h
+
+# Optional: Python virtual environments (if used)
+venv/
+env/
+
+# Build artifacts produced by the toolchain
+*.bin
+*.elf
+*.hex
+*.map
+
+# Object and dependency files
+*.o
+*.a
+*.d
+*.lnk
+
+# Generated files from compilation
+*.cxx
+*.swp
+*.tmp
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary data
+*.log
+
+# Arduino and PlatformIO specific caches (if any)
+ArduinoCache/

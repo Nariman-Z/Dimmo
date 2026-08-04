@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DimmoTelemetryPayload",
+  "description": "Schema for periodic telemetry data published by ESP32 to devices/{deviceId}/telemetry",
+  "type": "object",
+  "properties": {
+    "voltage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 500,
+      "description": "True RMS AC Mains Voltage in Volts (V)"
+    },
+    "current": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100000,
+      "description": "True RMS AC Mains Current in Milliamperes (mA) or Amperes (A)"
+    },
+    "power": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Active Power Consumption in Watts (W)"
+    },
+    "frequency": {
+      "type": "number",
+      "minimum": 40.0,
+      "maximum": 70.0,
+      "description": "Mains AC frequency in Hertz (Hz)"
+    },
+    "powerConsumption": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Accumulated energy consumption in Kilowatt-hours (kWh)"
+    },
+    "powerFactor": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Power Factor ratio metric (0.00 to 1.00)"
+    },
+    "brightness": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Current device brightness percentage (0-100)"
+    },
+    "rssi": {
+      "type": "integer",
+      "maximum": 0,
+      "minimum": -120,
+      "description": "ESP32 Wi-Fi Received Signal Strength Indicator in dBm"
+    }
+  },
+  "required": [
+    "voltage",
+    "current",
+    "power",
+    "frequency",
+    "powerConsumption",
+    "powerFactor",
+    "brightness"
+  ],
+  "additionalProperties": true
+}

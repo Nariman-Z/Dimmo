@@ -1,0 +1,10 @@
+{
+  "voltage": 230.1,
+  "current": 350.0,
+  "power": 80.5,
+  "frequency": 50.0,
+  "powerConsumption": 12.45,
+  "powerFactor": 0.98,
+  "brightness": 75,
+  "rssi": -45
+}

@@ -1,0 +1,14 @@
+# Handle line endings automatically for text files
+* text=auto
+
+# Ensure source code files always use LF (Linux standard) line endings
+*.cpp text eol=lf
+*.h text eol=lf
+*.dart text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+
+# Denote files that are truly binary and should not be modified by line-ending rules
+*.png diff=image
+*.jpg diff=image
+*.ico diff=image

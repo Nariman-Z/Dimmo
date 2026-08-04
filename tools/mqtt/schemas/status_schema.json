@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DimmoStatusPayload",
+  "description": "Schema for retained device state published to devices/{deviceId}/status",
+  "type": "object",
+  "properties": {
+    "state": {
+      "type": "string",
+      "enum": ["online", "offline"],
+      "description": "Device connectivity status"
+    },
+    "power": {
+      "type": "boolean",
+      "description": "Current power state"
+    },
+    "brightness": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Current brightness percentage"
+    }
+  },
+  "required": ["state", "power", "brightness"],
+  "additionalProperties": false
+}

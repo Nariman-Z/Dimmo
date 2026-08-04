@@ -1,0 +1,7 @@
+{
+  "broker": "YOUR_BROKER_HOST",
+  "port": 8883,
+  "username": "YOUR_USERNAME",
+  "password": "YOUR_PASSWORD",
+  "device_id": "dev"
+}

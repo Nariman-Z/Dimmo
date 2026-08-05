@@ -30,6 +30,10 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Setup Default SSL Certificate
+        working-directory: flutter_app
+        run: cp assets/certificates/client.crt.example assets/certificates/client.crt
+
       - name: Install Flutter Dependencies
         working-directory: flutter_app
         run: flutter pub get

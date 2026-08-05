@@ -58,13 +58,6 @@ The following Proteus simulation captures demonstrate AC phase-angle slicing at 
 
 ---
 
-### TRIAC Output Waveform Detail
-![TRIAC Output Waveform](../images/triac%20output.jpg)
-
-*Detailed view of the phase-cut AC sinusoidal waveform across the load.*
-
----
-
 ## 🔬 3. Physical Hardware Oscilloscope Measurements
 
 Measurements captured from a physical oscilloscope connected directly to the Dimmo circuit board hardware.

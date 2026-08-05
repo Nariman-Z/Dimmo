@@ -8,7 +8,7 @@ The official firmware for the Dimmo IoT Smart Dimmer system, engineered in C++ f
 
 - **Microcontroller**: ESP32-WROOM-32 / ESP32 DevKit v1
 - **Zero-Cross Detector**: H11AA1 optocoupler with AC input rectifier & noise filter
-- **TRIAC Module**: BT139-600E TRIAC driven by MOC3021 optocoupler
+- **TRIAC Module**: BTA16-600B TRIAC driven by MOC3021 optocoupler
 - **Voltage Sensor**: ZMPT101B active AC voltage transformer module
 - **Current Sensor**: ACS712-05B Hall-effect current sensor module
 - **Display**: 16x2 I2C LCD Display (PCF8574 I2C adapter at address `0x27`)

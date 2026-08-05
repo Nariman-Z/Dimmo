@@ -10,7 +10,7 @@ This directory contains circuit schematics, PCB layout files, component datashee
 hardware/
 ├── schematics/        # Circuit diagrams & CAD source files
 ├── pcb/               # Gerber files & PCB design layouts
-└── datasheets/        # Component datasheets (BT139, H11AA1, ZMPT101B, ACS712)
+└── datasheets/        # Component datasheets (BTA16, H11AA1, ZMPT101B, ACS712)
 ```
 
 ---

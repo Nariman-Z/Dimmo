@@ -33,5 +33,7 @@ This project relies on sensitive configurations such as Wi-Fi credentials, MQTT 
 - `tools/scripts/config.json` is excluded from version control via [`tools/scripts/.gitignore`](/tools/scripts/.gitignore).
 
 ### 3. Flutter Application SSL Certificate
-- Place your TLS/SSL root certificate or client certificate in `flutter_app/assets/certificates/client.crt`.
+- Copy [`flutter_app/assets/certificates/client.crt.example`](/flutter_app/assets/certificates/client.crt.example) to `flutter_app/assets/certificates/client.crt`.
+- Replace `flutter_app/assets/certificates/client.crt` with your TLS/SSL root certificate or client certificate if using a custom CA.
+- `client.crt` and private keys are excluded from version control via [`flutter_app/.gitignore`](/flutter_app/.gitignore).
 - Configure your connection parameters securely in the app login screen.

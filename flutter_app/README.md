@@ -19,7 +19,11 @@ The official cross-platform mobile application for the Dimmo IoT Smart Dimmer ec
    ```bash
    cd flutter_app
    ```
-2. Fetch dependencies:
+2. Copy the example SSL certificate configuration:
+   ```bash
+   cp assets/certificates/client.crt.example assets/certificates/client.crt
+   ```
+3. Fetch dependencies:
    ```bash
    flutter pub get
    ```

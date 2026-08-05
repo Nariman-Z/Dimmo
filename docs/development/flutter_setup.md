@@ -17,7 +17,11 @@ This guide covers setting up, building, running, and testing the Dimmo Flutter m
    ```bash
    cd flutter_app
    ```
-2. Install dependencies:
+2. Copy the example SSL certificate configuration:
+   ```bash
+   cp assets/certificates/client.crt.example assets/certificates/client.crt
+   ```
+3. Install dependencies:
    ```bash
    flutter pub get
    ```

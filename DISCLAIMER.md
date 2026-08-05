@@ -19,7 +19,7 @@
    - Have adequate technical knowledge and training in high-voltage AC electrical safety.
    - Always disconnect the primary power source before touching any circuit component.
    - Ensure galvanic optocoupler isolation (H11AA1, MOC3021) is fully functional and properly spaced on PCB layouts (creepage and clearance distances).
-   - Use appropriately rated fuses, enclosures, and thermal heat sinks for power switching semiconductors (BT139 TRIAC).
+   - Use appropriately rated fuses, enclosures, and thermal heat sinks for power switching semiconductors (BTA16 TRIAC).
    - Never leave operating high-voltage AC experimental circuits unattended.
 
 4. **Use At Your Own Risk**  

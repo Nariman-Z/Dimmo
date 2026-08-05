@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Security / TLS Certificates (CRITICAL)
+# Never leak private keys or active deployment certificates!
+assets/certificates/*.crt
+assets/certificates/*.key
+assets/certificates/*.pem
+assets/certificates/*.p12
+assets/certificates/*.pfx
+!assets/certificates/client.crt.example
+

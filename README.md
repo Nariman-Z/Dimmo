@@ -46,7 +46,7 @@ Ideally suited for industrial heating elements, precision lighting dimming syste
 |-------------------------|-------------------------------------------------------------------------------|
 | **ESP32-WROOM**         | Dual-core compute engine handling asynchronous control loops, telemetry, and TLS execution. |
 | **H11AA1**              | Dual-optoisolated zero-cross detection circuit utilizing hardware RC noise filtration. |
-| **BT139 + MOC3021**     | Snubber-protected, optically isolated high-power AC semiconductor switching node.    |
+| **BTA16 + MOC3021**     | Snubber-protected, optically isolated high-power AC semiconductor switching node.    |
 | **ZMPT101B**            | Precision voltage transformer module for analog true RMS mains monitoring (0-250V AC). |
 | **ACS712**              | Hall-effect linear current sensor for line-load telemetry tracking.             |
 | **16x2 I2C LCD**        | Low-latency visual instrumentation panel displaying systemic edge parameters.      |
@@ -134,7 +134,7 @@ Flutter Mobile App (flutter_app/)
         |  (Zero-Cross ISR & Phase Firing)
         v
   TRIAC + Sensors (hardware/)
-  (BT139 + MOC3021 / ZMPT101B / ACS712 / H11AA1)
+  (BTA16 + MOC3021 / ZMPT101B / ACS712 / H11AA1)
 ```
 
 ```text

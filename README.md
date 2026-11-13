@@ -1,14 +1,34 @@
 <!-- Gradient Divider -->
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-<!-- Dynamic Header -->
-<img height=350 alt="Repo Banner - Dimmo" src="https://capsule-render.vercel.app/api?type=waving&color=0:6E9EAB,100:23395B&height=300&section=header&text=🔥Dimmo&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=IoT-Enabled%20AC%20Power%20Regulation%20with%20Secure%20Remote%20Access&descAlignY=60&descAlign=50"></img>
+<!-- App Preview Banner -->
+<p align="center">
+  <img src="docs/images/dimmo-app-preview.webp" alt="Dimmo Mobile App Preview - Main Screen and Guest Mode Mockups" width="100%">
+</p>
 
-<!--Title-->
+<!-- Title -->
 <p align="center">
   <b>TRIAC Firing Angle Control – Closed Loop Ecosystem (v3.0)</b>
   <br> <small> <i>- A precision-engineered AC power modulation system featuring real-time telemetry, secure IoT networking, and hardware-level safety mechanisms -</i> </small> <br>
 </p> 
+
+<!-- Badges -->
+<p align="center">
+  <a href="https://github.com/Nariman-Z/Dimmo/releases"><img src="https://img.shields.io/badge/Release-v3.0.0-3B82F6.svg?logo=github" alt="Release: v3.0.0"></a>
+  <a href="https://github.com/Nariman-Z/Dimmo/actions/workflows/release-apk.yml"><img src="https://github.com/Nariman-Z/Dimmo/actions/workflows/release-apk.yml/badge.svg" alt="Build &amp; Release APK"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="docs/pdf/BSc_Thesis_Nariman_Ziaie.pdf"><img src="https://img.shields.io/badge/Thesis-B.Sc.%20EE%20Project-8A2BE2.svg?logo=read-the-docs&logoColor=white" alt="B.Sc. Thesis"></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome"></a>
+</p>
+<p align="center">
+  <a href="https://www.espressif.com/"><img src="https://img.shields.io/badge/Hardware-ESP32--WROOM--32-E7352C.svg?logo=espressif&logoColor=white" alt="ESP32"></a>
+  <a href="https://platformio.org/"><img src="https://img.shields.io/badge/PlatformIO-Arduino%20Framework-F38020.svg?logo=platformio&logoColor=white" alt="PlatformIO"></a>
+  <a href="firmware/"><img src="https://img.shields.io/badge/C%2B%2B-17-00599C.svg?logo=c%2B%2B&logoColor=white" alt="C++17"></a>
+  <a href="flutter_app/"><img src="https://img.shields.io/badge/Flutter-3.x-02569B.svg?logo=flutter&logoColor=white" alt="Flutter"></a>
+  <a href="flutter_app/"><img src="https://img.shields.io/badge/Dart-3.x-0175C2.svg?logo=dart&logoColor=white" alt="Dart"></a>
+  <a href="docs/architecture/mqtt_architecture.md"><img src="https://img.shields.io/badge/MQTT-TLS%201.2%20%7C%208883-660066.svg?logo=eclipsemosquitto&logoColor=white" alt="MQTT TLS 1.2"></a>
+  <a href="tools/"><img src="https://img.shields.io/badge/Simulator-Python%203.10%2B-3776AB.svg?logo=python&logoColor=white" alt="Python 3.10+"></a>
+</p>
 
 ---
 
@@ -120,60 +140,129 @@ Implemented via a high-efficiency **C++ (PlatformIO / Arduino-ESP32 Core)** fram
 
 ## 🏗️ Architecture & Repository Structure
 
+### 🔄 System Communication Topology
+
 ```text
-Flutter Mobile App (flutter_app/)
-        |
-        |  (Encrypted MQTT over TLS 1.2 / Port 8883)
-        v
-    MQTT Broker (EMQX) <---> Python Simulator (tools/)
-        ^
-        |  (Telemetry & Command JSON Sub/Pub)
-        |
-  ESP32 Firmware (firmware/)
-        |
-        |  (Zero-Cross ISR & Phase Firing)
-        v
-  TRIAC + Sensors (hardware/)
-  (BTA16 + MOC3021 / ZMPT101B / ACS712 / H11AA1)
+┌──────────────────────────────────────┐           ┌──────────────────────────────────────┐
+│          Flutter Mobile App          │           │       Python Hardware Simulator      │
+│     (Real-Time Control & Metrics)    │           │      (Mock Hardware & Testing)       │
+└──────────────────┬───────────────────┘           └──────────────────┬───────────────────┘
+                   │                                                  │
+                   │  TLS 1.2 Encrypted MQTT (Port 8883)              │
+                   ▼                                                  ▼
+         ┌──────────────────────────────────────────────────────────────────┐
+         │                    Cloud / Local MQTT Broker                     │
+         │                   (EMQX Message Broker / TLS)                    │
+         └─────────────────────────────────┬────────────────────────────────┘
+                                           │
+                                           │ Telemetry & Commands (JSON)
+                                           ▼
+                           ┌────────────────────────────────┐
+                           │   ESP32 Edge Microcontroller   │
+                           │   (PlatformIO C++ Core Engine) │
+                           └───────┬────────────────┬───────┘
+                                   │                │
+                 Zero-Cross ISR    │                │ Microsecond Gate Firing
+                 & True RMS Sense  │                │ (Phase Angle: 0° to 180°)
+                                   ▼                ▼
+          ┌──────────────────────────────┐    ┌──────────────────────────────┐
+          │      Sensors & Isolation     │    │      Power Semiconductor     │
+          │  • H11AA1 Zero-Crossing      │    │  • MOC3021 Optocoupler       │
+          │  • ZMPT101B Voltage (RMS)    │    │  • BTA16-600B Power TRIAC    │
+          │  • ACS712 Current (RMS)      │    │  • RC Snubber Filter Network │
+          └──────────────────────────────┘    └──────────────┬───────────────┘
+                                                             │
+                                                             ▼
+                                              ┌──────────────────────────────┐
+                                              │    AC Mains Load (220V)      │
+                                              │  (Incandescent, Heat, Motor) │
+                                              └──────────────────────────────┘
 ```
+
+### 📁 Repository Directory Structure
 
 ```text
 Dimmo/
-├── docs/               # System, MQTT, hardware, and development documentation
-├── firmware/           # ESP32 PlatformIO C++ source code & dependencies
-├── flutter_app/        # Cross-platform Flutter mobile application
-├── hardware/           # Hardware schematics, PCB layouts, and component datasheets
-├── tools/              # Python hardware simulator and MQTT development tools
-├── LICENSE             # MIT License
-├── CHANGELOG.md        # Release version ledger
-├── CONTRIBUTING.md     # Development and submission guidelines
-├── DISCLAIMER.md       # High-voltage AC safety warning & disclaimer
-└── SECURITY.md        # Vulnerability disclosure & secret management guide
+├── .github/
+│   └── workflows/
+│       └── release-apk.yml          # GitHub Actions CI: Automated Flutter release APK build & deploy
+├── docs/                            # Comprehensive engineering and architectural documentation
+│   ├── architecture/                # System diagrams, MQTT protocol, and security models
+│   │   ├── communication_protocol.md# MQTT topics, payload schemas, and QoS levels
+│   │   ├── mqtt_architecture.md     # TLS 1.2 encryption, session routing, and authentication
+│   │   └── system_architecture.md   # Architectural overview and subsystem decomposition
+│   ├── development/                 # Subsystem setup, compilation, and troubleshooting guides
+│   │   ├── firmware_setup.md        # ESP32 PlatformIO build, flashing, and configuration
+│   │   ├── flutter_setup.md         # Flutter SDK setup, dependencies, and APK generation
+│   │   └── troubleshooting.md       # Hardware diagnostic procedures, FAQs, and debugging
+│   ├── hardware/                    # Circuit analysis, wiring schematics, and signal waveforms
+│   │   ├── components.md            # Complete Bill of Materials (BOM) & component ratings
+│   │   ├── datasheets.md            # Hardware datasheet index & academic thesis reference
+│   │   ├── hardware_setup.md        # Physical assembly, pin mappings, and sensor calibration
+│   │   ├── schematic_notes.md       # Galvanic isolation, snubber network, and gate drive
+│   │   └── waveforms.md             # Oscilloscope captures and zero-cross timing analysis
+│   ├── images/                      # Signal captures, circuit photos, and visual assets
+│   ├── pdf/
+│   │   └── BSc_Thesis_Nariman_Ziaie.pdf # Official B.Sc. graduation thesis research paper
+│   └── README.md                    # Documentation index and subsystem reference map
+├── firmware/                        # ESP32 embedded firmware (PlatformIO / C++)
+│   ├── include/                     # Project C++ header declarations
+│   ├── lib/
+│   │   └── Secrets/                 # Private credentials isolation module
+│   │       ├── Secrets.h.example    # Public credentials and TLS CA root template
+│   │       └── Secrets.h            # Local Wi-Fi, MQTT credentials, and TLS CA (gitignored)
+│   ├── src/
+│   │   └── main.cpp                 # Firmware entry: ISR, TRIAC phase control, RMS ADC, TLS MQTT, OTA
+│   ├── test/                        # Embedded unit testing suite
+│   ├── platformio.ini               # PlatformIO build environments, board profiles, and dependencies
+│   └── README.md                    # Firmware documentation, pinout mappings, and flashing guide
+├── flutter_app/                     # Cross-platform mobile dashboard application
+│   ├── android/                     # Android native platform project and Gradle configurations
+│   ├── assets/
+│   │   ├── certificates/            # TLS root certificates (client.crt.example)
+│   │   └── icon/                    # Multi-resolution application launcher icons
+│   ├── ios/                         # iOS native platform project and Xcode workspace
+│   ├── lib/                         # Application source code
+│   │   ├── core/                    # Theme, constants, network services, and localization (EN/FA)
+│   │   ├── features/                # Auth connection screen, real-time dashboard, and telemetry
+│   │   └── main.dart                # Application entrypoint and dependency initialization
+│   ├── pubspec.yaml                 # Flutter package metadata, dependencies, and assets
+│   └── README.md                    # Mobile client setup, features, and build instructions
+├── hardware/                        # Hardware design assets, PCB layouts, and datasheets
+│   ├── datasheets/                  # Manufacturer datasheets (BTA16, H11AA1, ZMPT101B, ACS712, etc.)
+│   ├── pcb/                         # Printed circuit board Gerber and layout files
+│   ├── schematics/                  # Circuit schematic source files and diagrams
+│   └── README.md                    # Hardware subsystem index and bill of materials links
+├── tools/                           # Offline simulation and MQTT verification toolset
+│   ├── mqtt/
+│   │   ├── samples/                 # Standard JSON sample payloads (command, telemetry, status)
+│   │   ├── schemas/                 # Formal JSON Schemas for payload validation
+│   │   └── test_mqtt_payloads.py    # Automated offline schema validator & live MQTT test runner
+│   ├── scripts/
+│   │   ├── config.example.json      # Hardware simulator configuration template
+│   │   ├── config.json              # Local simulator configuration (gitignored)
+│   │   └── esp_simulator.py         # Python-based ESP32 hardware simulator for offline testing
+│   ├── requirements.txt             # Python dependencies (paho-mqtt, jsonschema)
+│   └── README.md                    # Simulation toolset guide and verification workflows
+├── .editorconfig                    # Cross-editor formatting specifications
+├── .gitattributes                   # Git path-specific attributes and line-ending rules
+├── .gitignore                       # Repository-wide build and secret exclusion patterns
+├── CHANGELOG.md                     # Semantic version release notes and project history
+├── CONTRIBUTING.md                  # Development guidelines, PR workflow, and standards
+├── DISCLAIMER.md                    # High-voltage electrical safety warnings and legal terms
+├── LICENSE                          # MIT Open-Source License
+├── README.md                        # Master project documentation and ecosystem overview
+└── SECURITY.md                      # Vulnerability reporting protocol and secrets hygiene
 ```
 
-- [`firmware/`](firmware): PlatformIO ESP32 source code, zero-cross interrupts, and TLS MQTT client.
-- [`flutter_app/`](flutter_app): Flutter mobile dashboard application with neumorphic UI and localization.
-- [`tools/`](tools): Python-based hardware simulator for local testing without physical hardware.
-- [`docs/`](docs): In-depth system architecture, communication protocols, and setup guides.
-- [`hardware/`](hardware): Schematics, pin mappings, and board specifications.
+### 📦 Key Subsystems & Navigation
 
----
-
-## 📜 Version Ledger
-| Generation | Deployment Context | Notable Milestones & Iterations |
-|----------|---------------|----------------------------------------------------------------------------------|
-| v1.0     | Nov 2024      | Foundational phase control setup; validated basic current & voltage tracking logic.|
-| v2.0     | Apr 2025      | Restructured Zero-Cross ISR handling to optimize phase interception performance. |
-| v2.1     | Apr 2025      | Refined phase-angle mathematical models to eliminate phase edge instability.   |
-| v2.2     | Apr 2025      | Introduced distributed state tracking via MQTT messaging primitives over TLS 1.2.|
-| v2.3     | May 2025      | Patched edge-case configuration state locks.                                   |
-| v2.4     | May 2025      | Hardened network vectors via TLS payload wrapping.                             |
-| v2.5     | May 2025      | Provisioned secure OTA flash memory layout structures.                           |
-| v2.6     | Jun 2025      | Implemented NTP clock sync for deterministic edge telemetry logging.            |
-| v2.7     | Jun 2025      | Rolled out companion Cross-Platform Neumorphic Dashboard Mobile App (Flutter).   |
-| v2.8     | Jul 2025      | Added proactive memory guardian engines to prevent stack crashes.            |
-| v2.9     | Jul 2025      | Optimized Analog-to-Digital filtering constants for refined electrical metrics.|
-| **v3.0** | **Aug 2026**  | **Complete repository audit, GitHub open-source release, Python simulator suite, standardized MQTT JSON schema, and MIT license migration.** |
+- ⚡ **[`firmware/`](firmware/)**: PlatformIO C++ firmware targeting the ESP32-WROOM-32. Handles interrupt-driven zero-crossing detection, microsecond-precision TRIAC gate firing ($0^\circ \text{ to } 180^\circ$), continuous true-RMS voltage/current sampling, over-the-air (OTA) updates, and encrypted TLS 1.2 MQTT telemetry.
+- 📱 **[`flutter_app/`](flutter_app/)**: Production-ready cross-platform mobile application (`com.narimanz.dimmo`) built with Flutter & Dart. Features a neumorphic UI, real-time electrical metrics (V, I, W, Hz, kWh, PF), debounced brightness slider, dark/light themes, and bilingual support (English/Persian).
+- 🔌 **[`hardware/`](hardware/)**: Electrical design assets including component datasheets (BTA16 TRIAC, H11AA1 zero-cross detector, ZMPT101B voltage transformer, ACS712 Hall-effect sensor), circuit schematics, PCB layouts, and optoisolation safety boundaries.
+- 🧪 **[`tools/`](tools/)**: Complete offline development suite featuring a Python ESP32 hardware simulator (`esp_simulator.py`), official JSON payload schemas, sample payloads, and an automated schema verification runner (`test_mqtt_payloads.py`).
+- 📚 **[`docs/`](docs/)**: In-depth documentation suite containing system architecture, TLS 1.2 MQTT network specifications, step-by-step setup guides, oscilloscope waveform captures, and the original undergraduate research B.Sc. thesis PDF.
+- 🤖 **[`.github/workflows/`](.github/workflows/)**: Automated CI/CD pipeline (`release-apk.yml`) that builds and packages signed release Android APKs on GitHub release tag pushes (`v*`).
 
 ---
 
@@ -187,6 +276,7 @@ Quick links to setup instructions for each component:
 - 🎓 **[Academic B.Sc. Thesis (PDF)](docs/pdf/BSc_Thesis_Nariman_Ziaie.pdf)**: Complete undergraduate research paper by Nariman Ziaie.
 - 📑 **[Datasheets & Waveforms](docs/hardware/datasheets.md)**: Component datasheets, oscilloscope signal captures, and circuit analysis.
 - 🔐 **[Secrets & Configuration Setup](SECURITY.md#secrets-management--configuration-guidelines)**: Generating local configuration files (`Secrets.h` and `config.json`).
+- 📜 **[Changelog & Version History](CHANGELOG.md)**: Track all release notes, historical milestones, and version updates across project iterations.
 
 ---
 
@@ -268,6 +358,6 @@ Licensed under the terms of the **MIT License**. For explicit permissions and wa
 </div>
 
 <!-- Gradient Divider -->
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-_Last Update: August 4, 2026_
+_Last Update: November 4, 2026_

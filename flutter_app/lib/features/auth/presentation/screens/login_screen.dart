@@ -137,6 +137,24 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  void _loginAsGuest() {
+    TextInput.finishAutofillContext();
+    FocusScope.of(context).unfocus();
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const DashboardPage(
+          brokerAddress: 'demo.emqx.io',
+          port: 8883,
+          username: 'guest',
+          password: '',
+          deviceId: 'dimmo',
+          isGuestMode: true,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -326,6 +344,46 @@ class _LoginPageState extends State<LoginPage> {
                                           letterSpacing: 1.2,
                                         ),
                                       ),
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 52,
+                              child: OutlinedButton.icon(
+                                onPressed: _isConnecting ? null : _loginAsGuest,
+                                icon: Icon(
+                                  Icons.person_outline_rounded,
+                                  color: theme.textColor,
+                                  size: 20,
+                                ),
+                                label: Text(
+                                  theme.translate('guest_login'),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: theme.textColor,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: theme.isDark
+                                      ? const Color(0xFF2C2C2E)
+                                      : Colors.white.withValues(alpha: 0.8),
+                                  side: BorderSide(
+                                    color: theme.subTextColor.withValues(
+                                      alpha: 0.25,
+                                    ),
+                                    width: 1.5,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  elevation: 2,
+                                  shadowColor: Colors.black.withValues(
+                                    alpha: theme.isDark ? 0.2 : 0.05,
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 40),

@@ -1,7 +1,7 @@
 name: dimmo
 description: "IoT-Enabled AC Power Regulation with Secure Remote Access"
 publish_to: 'none'
-version: 3.0.0+1
+version: 3.1.0+1
 
 environment:
   sdk: ^3.12.2
